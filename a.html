@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Indian Culture Crossword Puzzle</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            text-align: center;
+            color: #343a40;
+        }
+        h1 {
+            color: #007bff;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        td {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #007bff;
+            position: relative;
+        }
+        input {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            border: none;
+            outline: none;
+            font-size: 24px;
+            color: #495057;
+            background-color: #f8f9fa;
+            transition: background-color 0.3s;
+        }
+        input:focus {
+            background-color: #d1ecf1;
+        }
+        .number {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: smaller;
+            color: #007bff;
+        }
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .correct {
+            background-color: #c3e6cb;
+        }
+        .incorrect {
+            background-color: #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Indian Culture and Heritage Crossword Puzzle</h1>
+
+    <table>
+        <tr>
+            <td>
+                <span class="number">1</span>
+                <input maxlength="1" id="cell-1" />
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <span class="number">2</span>
+                <input maxlength="1" id="cell-2" />
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                <span class="number">3</span>
+                <input maxlength="1" id="cell-3" />
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <span class="number">4</span>
+                <input maxlength="1" id="cell-4" />
+            </td>
+            <td></td>
+            <td>
+                <span class="number">5</span>
+                <input maxlength="1" id="cell-5" />
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <span class="number">6</span>
+                <input maxlength="1" id="cell-6" />
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <span class="number">7</span>
+                <input maxlength="1" id="cell-7" />
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <span class="number">8</span>
+                <input maxlength="1" id="cell-8" />
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <span class="number">9</span>
+                <input maxlength="1" id="cell-9" />
+            </td>
+        </tr>
+    </table>
+
+    <h2>Clues</h2>
+    <h3>Across</h3>
+    <ul>
+        <li><span class="number">1:</span> Indian festival of lights (5)</li>
+        <li><span class="number">4:</span> Traditional Indian dance form (6)</li>
+        <li><span class="number">7:</span> Popular Indian film industry (3)</li>
+        <li><span class="number">8:</span> A holy river in India (6)</li>
+        <li><span class="number">9:</span> Famous Indian mathematician (6)</li>
+    </ul>
+    
+    <h3>Down</h3>
+    <ul>
+        <li><span class="number">2:</span> Indian spice used in curries (5)</li>
+        <li><span class="number">3:</span> Ancient Indian epic (5)</li>
+        <li><span class="number">5:</span> Indian garment worn by women (6)</li>
+        <li><span class="number">6:</span> Major religion from India (6)</li>
+    </ul>
+
+    <button class="button" onclick="checkAnswers()">Check Answers</button>
+
+    <script>
+        const answers = {
+            1: 'D', 2: 'I', 3: 'W', 4: 'K', 5: 'A', 6: 'L',
+            7: 'B', 8: 'O', 9: 'N',
+        };
+
+        function checkAnswers() {
+            let allCorrect = true;
+            for (let i = 1; i <= 9; i++) {
+                const userAnswer = document.getElementById(`cell-${i}`).value.toUpperCase();
+                const correctAnswer = answers[i];
+                const cell = document.getElementById(`cell-${i}`);
+
+                cell.classList.remove('correct', 'incorrect');
+
+                if (userAnswer === correctAnswer) {
+                    cell.classList.add('correct');
+                    cell.disabled = true; // Disable input for correct answers
+                } else {
+                    cell.classList.add('incorrect');
+                    allCorrect = false;
+                }
+            }
+            if (allCorrect) {
+                alert("Congratulations! You've completed the puzzle!");
+            } else {
+                alert("Some answers are incorrect. Please try again!");
+            }
+        }
+    </script>
+</body>
+</html>

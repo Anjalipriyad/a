@@ -1,0 +1,31 @@
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+
+// Crossword puzzle data
+const crosswordData = {
+    "across": [
+        { "number": 1, "clue": "Indian festival of lights (5)", "answer": "DIWALI" },
+        { "number": 4, "clue": "Traditional Indian dance form, also a state in India (6)", "answer": "KATHAK" },
+        { "number": 7, "clue": "Popular Indian film industry based in Mumbai (3)", "answer": "BOLLY" },
+        { "number": 8, "clue": "A holy river in India (6)", "answer": "GANGES" },
+        { "number": 9, "clue": "Famous Indian mathematician known for his contributions to number theory (6)", "answer": "RAMANUJAN" }
+    ],
+    "down": [
+        { "number": 2, "clue": "Indian spice often used in curries (5)", "answer": "TURMERIC" },
+        { "number": 3, "clue": "Ancient Indian epic, also a Sanskrit word (5)", "answer": "RAMAYAN" },
+        { "number": 5, "clue": "Indian garment worn by women (6)", "answer": "SARI" },
+        { "number": 6, "clue": "Major religion originating in India, known for karma and reincarnation (6)", "answer": "HINDU" }
+    ]
+};
+
+// Serve the crossword puzzle data
+app.get('/api/crossword', (req, res) => {
+    res.json(crosswordData);
+});
+
+app.listen(port, () => {
+    console.log(Server running at http://localhost:${port});
+});
